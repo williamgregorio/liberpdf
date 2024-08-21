@@ -23,4 +23,4 @@ The goal is to than take for granted these types of urls and leverage a library 
 
 ## Goals
 
-- [] query for books online using google search engine
+- [ ] query for books online using google search engine
