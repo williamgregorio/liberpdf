@@ -9,6 +9,10 @@
   <link rel="stylesheet" href="style.css" >
 </head>
 <body>
-  <h1>liberpdf</h1>
+    <main>
+      <h1>liberpdf</h1>
+      <div class="gcse-search"></div>
+    </main>
+    <script async src="https://cse.google.com/cse.js?cx=d727d6923a8a143d5"></script>
 </body>
 </html>
