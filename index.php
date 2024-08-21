@@ -12,6 +12,13 @@
     <main>
       <h1>liberpdf</h1>
       <div class="gcse-search"></div>
+<?php
+      include "db_connection.php";
+      $conn = openCon();
+      echo("Connected succesfully");
+      closeCon($conn);
+
+?>
     </main>
     <script async src="https://cse.google.com/cse.js?cx=d727d6923a8a143d5"></script>
 </body>
