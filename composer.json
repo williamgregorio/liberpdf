@@ -1,0 +1,14 @@
+{
+  "name": "gregorio/liberpdf",
+  "description": "create your library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "William Gregorio",
+      "email": "mail@williamgregorio.com"
+    }
+  ],
+  "require": {
+    "vlucas/phpdotenv": "^5.6"
+  }
+}
