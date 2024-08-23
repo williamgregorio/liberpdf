@@ -24,4 +24,4 @@ The goal is to than take for granted these types of urls and leverage a library 
 ## Goals
 
 - [x] give the user the ability to query for books online using Google search engine
-- [ ] create a user an account and register them 
+- [x] create a user an account and register them 
