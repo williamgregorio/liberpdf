@@ -3,12 +3,12 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 ?>
-<DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Register</title>
-</head>
-<body>
+
+<?php 
+$pageTitle = 'Register';
+include 'header.php'
+?>
+
 <?php
 include 'db_connection.php';
 
@@ -45,4 +45,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   Password: <input type="password" name="password" required><br>
   <button type="submit">Register</button>
 </form>
-</body>
+
+
+<?php include 'footer.php' ?>
