@@ -12,6 +12,15 @@ if ($_SERVER['REQUEST_METHOD']) == 'POST' {
   $stmt->bind_param('ss', $username, $password);
 
 
-    
+  if ($stmt->execute()) {
+    echo 'User registrated successfully';;
+  } else {
+    echo 'Registration failed.';
+  }
 
+
+  $stmt->close();
+  closeCon($conn);
 }
+
+?>
