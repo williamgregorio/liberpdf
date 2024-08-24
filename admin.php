@@ -76,7 +76,6 @@ if (isset($_POST['select_category'])) {
   if ($category_result->num_rows > 0) {
     $category_row = $category_result->fetch_assoc();
     $selected_category_name = htmlspecialchars($category_row['name']);
-    echo $selected_category_name;
   }
   $stmt->close();
 
@@ -150,7 +149,7 @@ closeCon($conn);
 
 <?php if (isset($book_result)): ?>
 <h2>Category selected: <?php echo $selected_category_name; ?> </h2>
-<table>
+<table cellspacing="0" cellpadding="0" border="1">
   <thead>
     <tr>
       <th>Title</th>
