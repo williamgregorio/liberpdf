@@ -38,6 +38,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bind_param('sss', $username, $hashedPassword, $email);
 
     if ($stmt->execute()) {
+      $userId = $conn->insert_id;
+
+      session_start();
+      $_SESSION['authenticated'] = true;
+      $_SESSION['user_id'] = $userId;
+      $_SESSION['username'] = $username;
+
       header('Location: admin.php');
       exit();
     } else {
