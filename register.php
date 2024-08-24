@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   $conn = openCon();
 
-  $stmt = $conn->prepare('SELECT id FROM accounts WHERE username = ? OR email = ?');
+  $stmt = $conn->prepare('SELECT id FROM users WHERE username = ? OR email = ?');
   $stmt->bind_param('ss', $username, $email);
   $stmt->execute();
   $stmt->store_result();
@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->close();
   } else {
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-    $stmt = $conn->prepare('INSERT INTO accounts (username, password, email) VALUES (?,?,?)');
+    $stmt = $conn->prepare('INSERT INTO users (username, password, email) VALUES (?,?,?)');
 
     if ($stmt === false) {
       die('Preparation failed: ' . $conn->error);
