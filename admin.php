@@ -1,6 +1,6 @@
 <?php
 ini_set('display_errors', 1);
-ini_set('display_startup_error', 1);
+ini_set('display_startup_errors', 1);
 ?>
 
 <?php
@@ -68,21 +68,21 @@ if (isset($_POST['select_category'])) {
 
   //category name get
   $stmt = $conn->prepare('SELECT name FROM categories WHERE id = ?');
-  $stmt->bind_param('i', $selected_category);
+  $stmt->bind_param('i', $selected_category_id);
 
   $stmt->execute();
   $category_result = $stmt->get_result();
 
   if ($category_result->num_rows > 0) {
     $category_row = $category_result->fetch_assoc();
-    $selected_category_name = htmlspecialchars($category_name['name']);
+    $selected_category_name = htmlspecialchars($category_row['name']);
     echo $selected_category_name;
   }
   $stmt->close();
 
   //get books on selected category id
   $stmt = $conn->prepare('SELECT title, author, url FROM books WHERE category_id = ?');
-  $stmt->bind_param('i', $selected_category_id)
+  $stmt->bind_param('i', $selected_category_id);
   $stmt->execute();
   $book_result = $stmt->get_result();
 }
@@ -97,7 +97,7 @@ if (isset($_POST['select_category'])) {
   <button type="submit" name="add_category">Add Category</button>
 </form>
 
-<h2>Add a bookAdd a book</h2>
+<h2>Add a book</h2>
 <form method="post" action="">
   <label for="title">Title:</label>
   <input type="text" id="title" name="title" required><br>
@@ -149,7 +149,7 @@ closeCon($conn);
 </form>
 
 <?php if (isset($book_result)): ?>
-<h2>Category selected: </h2>
+<h2>Category selected: <?php echo $selected_category_name; ?> </h2>
 <table>
   <thead>
     <tr>
