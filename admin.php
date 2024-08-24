@@ -1,17 +1,19 @@
 <?php
-session_start();
-
-if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
-  header('Location: login.php');
-  exit();
-}
-
+ini_set('display_errors', 1);
+ini_set('display_startup_error', 1);
 ?>
 
 <?php
 $pageTitle = 'Admin';
 include 'header.php';
 include 'db_connection.php';
+?>
+
+<?php
+if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
+  header('Location: login.php');
+  exit();
+}
 ?>
 
 <?php
