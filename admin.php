@@ -111,7 +111,6 @@ closeCon($conn);
 <button type="submit" name="add_book">Add book</button>
 </form>
 
-
 <h2>Select category to view your books</h2>
 <form method="post" action="">
   <label for="selected_category_id">Category:</label>
@@ -133,8 +132,26 @@ closeCon($conn);
   <button type="submit" name="select_category">View Books</button>
 </form>
 
-<?php
-
-?>
+<?php if (isset($book_result)): ?>
+<h2>Category selected: </h2>
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Author</th>
+      <th>URL</th>
+    </tr>
+  </thead>
+<tbody>
+<?php while ($book = $book_result->fetch_assoc()): ?>
+    <tr>
+      <td><?php echo htmlspecialchars($book['title']); ?></td>
+      <td><?php echo htmlspecialchars($book['author']); ?></td>
+      <td><a href="<?php echo htmlspecialchars($book['url']); ?>" target="_blank">Link</a></td>
+    </tr>
+<?php endwhile; ?>
+</tbody>
+</table>
+<?php endif; ?>
 
 <?php include 'footer.php' ?>
