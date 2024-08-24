@@ -23,7 +23,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $stmt = $conn->prepare('INSERT into categories (user_id, name) VALUES (?,?)');
     $stmt->bind_param('is', $userId, $categoryName);
-    
+
+    if ($stmt->execute()){
+      echo 'Category added succesfully';
+    } else {
+      echo 'Error adding category ' . $stmt->error;
+    }
+    $stmt->close();
   }
 }
 ?>
