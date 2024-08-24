@@ -37,6 +37,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
 }
 ?>
+
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  if (isset($_POST['add_book'])) {
+    $title = $_POST['title'];
+    $author = $_POST['author'];
+    $book_url = $_POST['url'];
+    $category_id = $_POST['category_id'];
+
+    $stmt = $conn->prepare('INSERT into books (title, author, url, category_id) VALUES (?,?,?,?)');
+    $stmt->bind_param('sssi', $title, $author, $book_url, $category_id);
+
+    if ($stmt->execute()) {
+      echo 'Book added succesfully';
+      header('Location: admin.php');
+      exit();
+    } else {
+      echo 'Error adding book ' . $stmt->error;
+    }
+    $stmt->close();
+  }
+}
+
+?>
 <h1>Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?></h1>
 
 <h2>Add a category</h2>
@@ -61,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <select id="category_id" name="category_id" required>
 <?php 
   $conn = openCon();
-  $stmt = $conn->prepare('SELECT id, name FROM Categories WHERE user_id = ?');
+  $stmt = $conn->prepare('SELECT id, name FROM categories WHERE user_id = ?');
   $stmt->bind_param('i', $_SESSION['user_id']);
   $stmt->execute();
   $result = $stmt->get_result();
