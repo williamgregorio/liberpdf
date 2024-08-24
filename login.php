@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   $conn = openCon();
 
-  $stmt = $conn->prepare('SELECT id, password FROM accounts WHERE username = ?');
+  $stmt = $conn->prepare('SELECT id, password FROM users WHERE username = ?');
   $stmt->bind_param('s', $username);
   $stmt->execute();
   $stmt->store_result();
