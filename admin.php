@@ -28,6 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($stmt->execute()){
       echo 'Category added succesfully';
+      header('Location: admin.php');
+      exit();
     } else {
       echo 'Error adding category ' . $stmt->error;
     }
