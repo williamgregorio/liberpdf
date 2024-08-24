@@ -59,8 +59,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->close();
   }
 }
-
 ?>
+
+<?php 
+if (isset($_POST['select_category'])) {
+  $selected_category = $_POST['selected_category_id'];
+
+  $stmt = $conn->prepare('SELECT title, author, url FROM books WHERE category_id = ?');
+  $stmt->bind_param('i', $selected_category);
+  $stmt->execute();
+  $book_result = $stmt->get_result();
+}
+?>
+
 <h1>Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?></h1>
 
 <h2>Add a category</h2>
