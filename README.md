@@ -20,8 +20,3 @@ We can refine our query like this: `"Make Your Own Neural Network 1st edition Ta
 [Full book in pdf](https://davidhason.com/wp-content/uploads/2023/12/5_6278459055300150353.pdf)
 
 The goal is to than take for granted these types of urls and leverage a library to manage your books, all in one place.
-
-## Goals
-
-- [x] give the user the ability to query for books online using Google search engine
-- [x] create a user an account and register them 
