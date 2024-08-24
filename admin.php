@@ -112,4 +112,29 @@ closeCon($conn);
 </form>
 
 
+<h2>Select category to view your books</h2>
+<form method="post" action="">
+  <label for="selected_category_id">Category:</label>
+  <select id="selected_category_id" name="selected_category_id" required>
+<?php
+  $conn = openCon();
+  $stmt = $conn->prepare('SELECT id, name FROM categories WHERE user_id = ?');
+  $stmt->bind_param('i', $_SESSION['user_id']);
+  $stmt->execute();
+  $result = $stmt->get_result();
+
+  while ($row = $result->fetch_assoc()) {
+    echo '<option value="' . $row['id'] . '">' . htmlspecialchars($row['name']) . '</option>';
+  }
+  $stmt->close();
+  closeCon($conn);
+?>
+  </select>
+  <button type="submit" name="select_category">View Books</button>
+</form>
+
+<?php
+
+?>
+
 <?php include 'footer.php' ?>
