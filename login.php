@@ -30,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (password_verify($password, $hashedPassword)) {
       session_start();
       $_SESSION['authenticated'] = true;
+      $_SESSION['user_id'] = $userId;
       $_SESSION['username'] = $username;
 
       header('Location: admin.php');
