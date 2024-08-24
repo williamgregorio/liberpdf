@@ -17,24 +17,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $password = $_POST['password'];
   $email = $_POST['email'];
 
-  $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
   $conn = openCon();
 
-  $stmt = $conn->prepare('INSERT INTO accounts (username, password, email) VALUES (?,?,?)');
-  if ($stmt === false) {
-    die('Prepare failed: ' . $conn->error);
-  }
+  $stmt = $conn->prepare('SELECT id FROM accounts WHERE username = ? OR email = ?');
+  $stmt->bind_param('ss', $username, $email);
+  $stmt->execute();
+  $stmt->store_result();
 
-  $stmt->bind_param('sss', $username, $hashedPassword, $email);
-
-  if ($stmt->execute()) {
-    echo 'User registrated successfully';;
+  if ($stmt->num_rows > 0) {
+    echo 'Username or email already exists.';
+    $stmt->close();
   } else {
-    echo 'Registration failed.' . $stmt->error;
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+    $stmt = $conn->prepare('INSERT INTO accounts (username, password, email) VALUES (?,?,?)');
+
+    if ($stmt === false) {
+      die('Preparation failed: ' . $conn->error);
+    }
+
+    $stmt->bind_param('sss', $username, $hashedPassword, $email);
+
+    if ($stmt->execute()) {
+      header('Location: admin.php');
+      exit();
+    } else {
+      echo 'Registration failed: ' . $stmt->error;
+    }
+
+    $stmt->close();
   }
 
-  $stmt->close();
   closeCon($conn);
 }
 ?>
