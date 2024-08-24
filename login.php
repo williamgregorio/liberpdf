@@ -9,6 +9,15 @@ $pageTitle = "Login";
 include 'header.php';  
 ?>
 
+<?php
+include 'db_connection.php';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+}
+
+?>
+
 <form method="post" action="">
   Username: <input type="text" name="username" required><br>
   Password: <input type="password" name="password" required><br>
