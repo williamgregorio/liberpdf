@@ -14,6 +14,19 @@ include 'header.php';
 include 'db_connection.php';
 ?>
 
+<?php
+$conn = openCon();
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  if (isset($_POST['add_category'])) {
+    $categoryName = $_POST['category_name'];
+    $userId = $_POST['userId'];
+
+    $stmt = $conn->prepare('INSERT into categories (user_id, name) VALUES (?,?)');
+    $stmt->bind_param('is', $userId, $categoryName);
+    
+  }
+}
+?>
 <h1>Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?></h1>
 
 <h2>Add a category</h2>
