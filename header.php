@@ -12,7 +12,6 @@
   <title>Default Title</title>
 <?php endif; ?>
 </head>
-
 <body>
 <main>
 <nav>
