@@ -62,11 +62,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 <?php 
+$selected_category_name = '';
 if (isset($_POST['select_category'])) {
-  $selected_category = $_POST['selected_category_id'];
+  $selected_category_id = $_POST['selected_category_id'];
 
-  $stmt = $conn->prepare('SELECT title, author, url FROM books WHERE category_id = ?');
+  //category name get
+  $stmt = $conn->prepare('SELECT name FROM categories WHERE id = ?');
   $stmt->bind_param('i', $selected_category);
+
+  $stmt->execute();
+  $category_result = $stmt->get_result();
+
+  if ($category_result->num_rows > 0) {
+    $category_row = $category_result->fetch_assoc();
+    $selected_category_name = htmlspecialchars($category_name['name']);
+    echo $selected_category_name;
+  }
+  $stmt->close();
+
+  //get books on selected category id
+  $stmt = $conn->prepare('SELECT title, author, url FROM books WHERE category_id = ?');
+  $stmt->bind_param('i', $selected_category_id)
   $stmt->execute();
   $book_result = $stmt->get_result();
 }
