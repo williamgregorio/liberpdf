@@ -8,4 +8,5 @@ error_reporting(E_ALL);
 $pageTitle = "Home";
 include 'header.php';
 ?>
+
 <?php include 'footer.php'; ?>
