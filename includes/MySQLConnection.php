@@ -31,6 +31,17 @@ class MySQLConnection {
 
   public function query($sql, $params = [], $types = '') {
     $stmt = $this->mysqli->prepare($sql);
+
+    if ($params) {
+      $stmt->bind_param($types, ...$params);
+    }
+
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $data =  $result->fetch_all(MYSQLI_ASSOC);
+
+    $stmt->close();
+    return $data;
   }
 
 }
