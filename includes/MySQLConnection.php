@@ -56,6 +56,9 @@ class MySQLConnection {
     return $result;
   }
 
+  public function close() {
+    $this->mysqli->close();
+  }
 
 
 }
