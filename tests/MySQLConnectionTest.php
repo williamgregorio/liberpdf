@@ -20,5 +20,9 @@ class MySQLConnectionTest extends TestCase {
     $this->db = new MySQLConnection($hostname, $username, $password, $database);
   }
 
+  protected function tearDown(): void {
+      $this->db->close();
+  }
+
 
 }
