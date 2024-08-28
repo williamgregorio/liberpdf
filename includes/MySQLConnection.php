@@ -33,7 +33,7 @@ class MySQLConnection {
     $stmt = $this->mysqli->prepare($sql);
 
     if ($stmt === false ) {
-      throw new Excepetion('Preparation failed: ' . $this->mysqli->error);
+      throw new Exception('Preparation failed: ' . $this->mysqli->error);
     }
  
     if ($params) {
@@ -56,7 +56,7 @@ class MySQLConnection {
     }
 
     if ($params) {
-      $this->mysqli->bind_param($types, ...$params);
+      $this->bind_param($types, ...$params);
     }
 
     $result = $stmt->execute();
@@ -67,8 +67,6 @@ class MySQLConnection {
   public function close() {
     $this->mysqli->close();
   }
-
-
 }
 
 ?>
