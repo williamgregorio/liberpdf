@@ -9,7 +9,7 @@ class MySQLConnectionTest extends TestCase {
   private $db;
 
   protected function setUp(): void {
-    $dotenv = Dotenv::createImmutable(__DIR__);
+    $dotenv = Dotenv::createImmutable(__DIR__ . '/../');
     $dotenv->load();
 
     $hostname = $_ENV['DB_HOST'];
@@ -24,5 +24,12 @@ class MySQLConnectionTest extends TestCase {
       $this->db->close();
   }
 
+  public function testQuery() {
+    $sql = 'SELECT id FROM users WHERE username = ?';
+    $params = ['william'];
+    $types = 's';
 
+    $result = $this->db->query($sql, $params, $types);
+    $this->assertIsArray($result);
+  }
 }
