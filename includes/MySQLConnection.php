@@ -29,6 +29,10 @@ class MySQLConnection {
     return $this->mysqli;
   }
 
+  public function query($sql, $params = [], $types = '') {
+    $stmt = $this->mysqli->prepare($sql);
+  }
+
 }
 
 ?>
