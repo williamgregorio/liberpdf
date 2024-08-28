@@ -22,6 +22,7 @@
 
     if (isset($_SESSION['authenticated']) && $_SESSION['authenticated'] === true) {
       echo '<li><a href="admin.php">Admin</a></li>';
+      echo '<li><a href="view-all-books.php">View all books</a></li>';
       echo '<li><a href="logout.php">Logout</a></li>';
     } else {
       echo '<li><a href="register.php">Register</a></li>';
