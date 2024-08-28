@@ -44,6 +44,20 @@ class MySQLConnection {
     return $data;
   }
 
+  public function execute($sql, $params = [], $types = '') {
+    $stmt = $this->mysqli->prepare($sql);
+
+    if ($params) {
+      $this->mysqli->bind_param($types, ...$params);
+    }
+
+    $result = $stmt->execute();
+    $stmt->close();
+    return $result;
+  }
+
+
+
 }
 
 ?>
