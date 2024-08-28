@@ -52,7 +52,7 @@ class MySQLConnection {
     $stmt = $this->mysqli->prepare($sql);
 
     if ($stmt === false) {
-      throw new Excepetion('Preparation failed: ' $this->mysqli->error);
+      throw new Excepetion('Preparation failed: ' . $this->mysqli->error);
     }
 
     if ($params) {
