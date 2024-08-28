@@ -32,6 +32,10 @@ class MySQLConnection {
   public function query($sql, $params = [], $types = '') {
     $stmt = $this->mysqli->prepare($sql);
 
+    if ($stmt === false ) {
+      throw new Excepetion('Preparation failed: ' . $this->mysqli->error);
+    }
+ 
     if ($params) {
       $stmt->bind_param($types, ...$params);
     }
