@@ -10,7 +10,6 @@ include 'header.php'
 require 'functions.php';
 
 loadEnvironment();
-echo $_ENV['DB_HOST'];
 
 $database = database();
 
