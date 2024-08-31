@@ -56,7 +56,7 @@ class MySQLConnection {
     }
 
     if ($params) {
-      $this->bind_param($types, ...$params);
+      $stmt->bind_param($types, ...$params);
     }
 
     $result = $stmt->execute();
