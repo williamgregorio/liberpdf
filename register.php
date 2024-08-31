@@ -7,54 +7,46 @@ error_reporting(E_ALL);
 <?php 
 $pageTitle = 'Register';
 include 'header.php'
-?>
+require 'functions.php';
 
-<?php
-include 'db_connection.php';
+loadEnvironment();
+echo $_ENV['DB_HOST'];
+
+$database = database();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $username = $_POST['username'];
   $password = $_POST['password'];
   $email = $_POST['email'];
 
-  $conn = openCon();
+  $sql = 'SELECT id FROM users WHERE username = ? OR email = ?';
+  $params = [$username, $email];
+  $types = 'ss';
+  
+  $existingUsers = $database->query($sql, $params, $types);
 
-  $stmt = $conn->prepare('SELECT id FROM users WHERE username = ? OR email = ?');
-  $stmt->bind_param('ss', $username, $email);
-  $stmt->execute();
-  $stmt->store_result();
-
-  if ($stmt->num_rows > 0) {
+  if(!empty($existingUsers)) {
     echo 'Username or email already exists.';
-    $stmt->close();
   } else {
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-    $stmt = $conn->prepare('INSERT INTO users (username, password, email) VALUES (?,?,?)');
+    $sql = 'INSERT INTO users (username, password, email) VALUES (?,?,?)';
+    $params = [$username, $hashedPassword, $email];
+    $types = 'sss';
 
-    if ($stmt === false) {
-      die('Preparation failed: ' . $conn->error);
-    }
-
-    $stmt->bind_param('sss', $username, $hashedPassword, $email);
-
-    if ($stmt->execute()) {
-      $userId = $conn->insert_id;
+    if ($database->execute($sql, $params, $types)) {
+      $userId = $database->getConnection()->insert_id;
 
       session_start();
       $_SESSION['authenticated'] = true;
       $_SESSION['user_id'] = $userId;
       $_SESSION['username'] = $username;
 
-      header('Location: admin.php');
+      header('location: admin.php');
       exit();
     } else {
-      echo 'Registration failed: ' . $stmt->error;
+      echo 'Registration failed: ' . $database->getConnection()->error;
     }
-
-    $stmt->close();
-  }
-
-  closeCon($conn);
+  } 
 }
 ?>
 
@@ -64,6 +56,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   Password: <input type="password" name="password" required><br>
   <button type="submit">Register</button>
 </form>
-
 
 <?php include 'footer.php' ?>
