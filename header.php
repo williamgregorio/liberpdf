@@ -15,6 +15,7 @@
 <body>
 <main>
 <nav>
+  <a href="/"><img src="assets/liberpdf-logo.png" alt="logo" /></a>
   <ul>
     <li><a href="index.php">Home</a></li>
 <?php
