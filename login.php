@@ -15,11 +15,13 @@ $database = database();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $username = $_POST['username'];
   $password = $_POST['password'];
-
+  echo $username;
+  echo $password;
   $sql = 'SELECT id, password FROM users WHERE username = ?';
   $params = [$username];
   $types = 's';
   $result = $database->query($sql, $params, $types);
+  var_dump($result);
 
   if (!empty($result)) {
     $user = $result[0];
@@ -27,19 +29,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $hashedPassword = $user['password'];
 
     if (password_verify($password, $hashedPassword)) {
-      session_start();
       $_SESSION['authenticated'] = true;
       $_SESSION['user_id'] = $userId;
       $_SESSION['username'] = $username;
 
-      header('location: admin.php');
+      header('Location: admin.php');
       exit();
     } else {
       echo 'Invalid username or password.';
-      }
-   }
-} else {
-    echo 'Invalid username or password.';
+    }
+  }
 }
 ?>
 
