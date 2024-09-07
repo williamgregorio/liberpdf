@@ -19,3 +19,10 @@ function database() {
   return $connection;
 }
 
+function isAuthenticated() {
+  if(!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
+    header('location: login.php');
+    exit();
+  }
+}
+
