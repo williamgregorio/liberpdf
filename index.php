@@ -9,4 +9,8 @@ $pageTitle = "Home";
 include 'header.php';
 ?>
 
+<?php
+?>
+
 <?php include 'footer.php'; ?>
+
