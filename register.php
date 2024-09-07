@@ -6,11 +6,10 @@ error_reporting(E_ALL);
 
 <?php 
 $pageTitle = 'Register';
-include 'header.php'
+include 'header.php';
 require 'functions.php';
 
 loadEnvironment();
-
 $database = database();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -40,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $_SESSION['user_id'] = $userId;
       $_SESSION['username'] = $username;
 
-      header('location: admin.php');
+      header('Location: admin.php');
       exit();
     } else {
       echo 'Registration failed: ' . $database->getConnection()->error;
