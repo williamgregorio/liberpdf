@@ -6,39 +6,36 @@ ini_set('display_startup_errors', 1);
 <?php
 $pageTitle = 'Admin';
 include 'header.php';
-include 'db_connection.php';
-?>
+require 'functions.php';
 
-<?php
-if (!isset($_SESSION['authenticated']) || $_SESSION['authenticated'] !== true) {
-  header('Location: login.php');
-  exit();
-}
-?>
+loadEnvironment();
+isAuthenticated();
 
-<?php
-$conn = openCon();
+$database = database();
+
+// create a category
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if (isset($_POST['add_category'])) {
     $categoryName = $_POST['category_name'];
     $userId = $_SESSION['user_id'];
 
-    $stmt = $conn->prepare('INSERT into categories (user_id, name) VALUES (?,?)');
-    $stmt->bind_param('is', $userId, $categoryName);
-
-    if ($stmt->execute()){
-      echo 'Category added succesfully';
-      header('Location: admin.php');
+    $sql = 'INSERT into categories (user_id, name) VALUES (?,?)';
+    $params = [$userId, $categoryName];
+    $types = 'is';
+  
+    if ($database->execute($sql, $params, $types)) {
+      echo 'Category added successfully.';
+      header('location: admin.php');
       exit();
     } else {
-      echo 'Error adding category ' . $stmt->error;
+      echo 'Failed adding category: ' . $database->getConnection()->error;
     }
-    $stmt->close();
   }
 }
 ?>
 
 <?php
+// add a book to a category
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if (isset($_POST['add_book'])) {
     $title = $_POST['title'];
@@ -46,49 +43,56 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $book_url = $_POST['url'];
     $category_id = $_POST['category_id'];
 
-    $stmt = $conn->prepare('INSERT into books (title, author, url, category_id) VALUES (?,?,?,?)');
-    $stmt->bind_param('sssi', $title, $author, $book_url, $category_id);
+    $sql = 'INSERT into books (title, author, url, category_id) VALUES (?,?,?,?)';
+    $params = [$title, $author, $book_url, $category_id];
+    $types = 'sssi';
 
-    if ($stmt->execute()) {
+    if ($database->execute($sql, $params, $types)) {
       echo 'Book added succesfully';
       header('Location: admin.php');
       exit();
     } else {
-      echo 'Error adding book ' . $stmt->error;
+      echo 'Error adding book ' . $database->getConnection()->error;
     }
-    $stmt->close();
   }
 }
 ?>
 
 <?php 
+// get all books from selected category
 $selected_category_name = '';
-if (isset($_POST['select_category'])) {
+$book_result = null;
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['select_category'])) {
   $selected_category_id = $_POST['selected_category_id'];
 
-  //category name get
-  $stmt = $conn->prepare('SELECT name FROM categories WHERE id = ?');
-  $stmt->bind_param('i', $selected_category_id);
+  // get category name id
+  $sql = 'SELECT name FROM categories WHERE id = ?';
+  $params = [$selected_category_id];
+  $types = 'i';
 
-  $stmt->execute();
-  $category_result = $stmt->get_result();
-
-  if ($category_result->num_rows > 0) {
-    $category_row = $category_result->fetch_assoc();
-    $selected_category_name = htmlspecialchars($category_row['name']);
+  $result = $database->query($sql, $params, $types);
+  if ($result && !empty($result)) {
+    $category_result = $result[0];
+    $selected_category_name = htmlspecialchars($category_id['name']);
+  } else {
+    echo 'Error retrieving category.';
   }
-  $stmt->close();
+
 
   //get books on selected category id
-  $stmt = $conn->prepare('SELECT title, author, url FROM books WHERE category_id = ?');
-  $stmt->bind_param('i', $selected_category_id);
-  $stmt->execute();
-  $book_result = $stmt->get_result();
+  $sql = 'SELECT title, author, url FROM books WHERE category_id = ?';
+  $params = [$selected_category_id];
+  $types = 'i';
+
+  $book_result = $database->query($sql, $params, $types);
 }
 ?>
 
 <h1>Welcome, <?php echo htmlspecialchars($_SESSION['username']); ?></h1>
+<?
+echo $_SESSION['user_id'];
 
+?>
 <h2>Add a category</h2>
 <form method="post" action="">
   <label for="category_name">Category Name:</label>
@@ -110,17 +114,17 @@ if (isset($_POST['select_category'])) {
   <label for="category_id">Category:</label>
   <select id="category_id" name="category_id" required>
 <?php 
-  $conn = openCon();
-  $stmt = $conn->prepare('SELECT id, name FROM categories WHERE user_id = ?');
-  $stmt->bind_param('i', $_SESSION['user_id']);
-  $stmt->execute();
-  $result = $stmt->get_result();
-
-while ($row = $result->fetch_assoc()) {
-  echo '<option value="' . $row['id'] . '">' . htmlspecialchars($row['name']) . '</option>';
-}
-$stmt->close();
-closeCon($conn);
+  $sql = 'SELECT id, name FROM categories WHERE user_id = ?';
+  $params = [$_SESSION['user_id']];
+  $types = 'i';
+  $categories = $database->query($sql, $params, $types);
+    if ($categories) {
+      foreach ($categories as $category) {
+        echo '<option value="' . $category['id'] . '">' . htmlspecialchars($category['name']) . '</option>';
+      }
+    } else {
+      echo 'Error retrieving categories.';
+    }
 ?>
 </select>
 <button type="submit" name="add_book">Add book</button>
@@ -131,23 +135,16 @@ closeCon($conn);
   <label for="selected_category_id">Category:</label>
   <select id="selected_category_id" name="selected_category_id" required>
 <?php
-  $conn = openCon();
-  $stmt = $conn->prepare('SELECT id, name FROM categories WHERE user_id = ?');
-  $stmt->bind_param('i', $_SESSION['user_id']);
-  $stmt->execute();
-  $result = $stmt->get_result();
-
-  while ($row = $result->fetch_assoc()) {
-    echo '<option value="' . $row['id'] . '">' . htmlspecialchars($row['name']) . '</option>';
-  }
-  $stmt->close();
-  closeCon($conn);
+    $categories = $database->query($sql, $params, $types);
+    foreach ($categories as $category) {
+      echo '<option value="' . $category['id'] . '">' . htmlspecialchars($category['name']) . '</option>';
+    }
 ?>
   </select>
   <button type="submit" name="select_category">View Books</button>
 </form>
 
-<?php if (isset($book_result)): ?>
+<?php if ($book_result): ?>
 <h2>Category selected: <?php echo $selected_category_name; ?> </h2>
 <table cellspacing="0" cellpadding="0" border="1">
   <thead>
