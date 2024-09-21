@@ -1,12 +1,63 @@
-nav, ul{
-  display: flex;
-  gap: 16px;
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-nav ul li{
-  display: flex;
-  flex-direction: column-reverse;
-  text-decoration: none;
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%:
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+p,h1,h2,h3,h4,h5,h6 {
+  overflow-wrap: break-word;
+}
+
+main {
+  padding-left: 2.5%;
+  padding-right: 2.5%;
+}
+
+nav ul li {
   list-style: none;
+  display: flex;
+  justify-content: center;
+}
+
+nav {
+  display: flex;
+  padding-top: 1.5%;
+  padding-bottom: 1.5%;
+  padding-left: 2.5%;
+  padding-right: 2.5%;
+  gap: 12px;
+  align-self: baseline;
+}
+
+nav > ul {
+  display: flex;
+  gap: 2px;
+}
+
+nav ul li > a {
+  text-decoration: none;
+  padding: 12px;
+}
+
+nav a > img {
+  width: 70px;
+}
+
+nav ul {
+  height: auto;
 }
 
