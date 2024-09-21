@@ -13,7 +13,6 @@
 <?php endif; ?>
 </head>
 <body>
-<main>
 <nav>
   <a href="/"><img src="assets/liberpdf-logo.png" alt="logo" /></a>
   <ul>
@@ -21,7 +20,7 @@
     session_start();
 
     if (isset($_SESSION['authenticated']) && $_SESSION['authenticated'] === true) {
-      echo '<li><a href="admin.php">Admin</a></li>';
+      echo '<li><a href="admin.php">Dashboard</a></li>';
       echo '<li><a href="view-all-books.php">View all books</a></li>';
       echo '<li><a href="logout.php">Logout</a></li>';
     } else {
@@ -32,5 +31,6 @@
 ?>
   </ul>
 </nav>
+<main>
 <div class="gcse-search"></div>
 
