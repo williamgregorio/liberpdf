@@ -1,5 +1,7 @@
 <?php
 
+use PHPUnit\Exception;
+
 class MySQLConnection {
 
   private $mysqli;
@@ -42,7 +44,7 @@ class MySQLConnection {
 
     $stmt->execute();
     $result = $stmt->get_result();
-    $data =  $result->fetch_all(MYSQLI_ASSOC);
+    $data =  $result ? $result->fetch_all(MYSQLI_ASSOC) : [];
 
     $stmt->close();
     return $data;
