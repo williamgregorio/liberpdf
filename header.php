@@ -13,7 +13,6 @@
 <?php endif; ?>
 </head>
 <body>
-<main>
 <nav>
   <a href="/"><img src="assets/liberpdf-logo.png" alt="logo" /></a>
   <ul>
@@ -32,5 +31,6 @@
 ?>
   </ul>
 </nav>
+<main>
 <div class="gcse-search"></div>
 
