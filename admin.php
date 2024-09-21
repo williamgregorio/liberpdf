@@ -43,6 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $book_url = $_POST['url'];
     $category_id = $_POST['category_id'];
 
+    echo $category_id;
     $sql = 'INSERT into books (title, author, url, category_id) VALUES (?,?,?,?)';
     $params = [$title, $author, $book_url, $category_id];
     $types = 'sssi';
@@ -73,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['select_category'])) {
   $result = $database->query($sql, $params, $types);
   if ($result && !empty($result)) {
     $category_result = $result[0];
-    $selected_category_name = htmlspecialchars($category_id['name']);
+    $selected_category_name = htmlspecialchars($category_result['name']);
   } else {
     echo 'Error retrieving category.';
   }
@@ -145,6 +146,7 @@ echo $_SESSION['user_id'];
 </form>
 
 <?php if ($book_result): ?>
+<?php echo $book_result[0]; ?>
 <h2>Category selected: <?php echo $selected_category_name; ?> </h2>
 <table cellspacing="0" cellpadding="0" border="1">
   <thead>
