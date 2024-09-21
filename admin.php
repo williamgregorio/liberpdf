@@ -79,7 +79,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['select_category'])) {
     echo 'Error retrieving category.';
   }
 
-
   //get books on selected category id
   $sql = 'SELECT title, author, url FROM books WHERE category_id = ?';
   $params = [$selected_category_id];
@@ -146,7 +145,6 @@ echo $_SESSION['user_id'];
 </form>
 
 <?php if ($book_result): ?>
-<?php echo $book_result[0]; ?>
 <h2>Category selected: <?php echo $selected_category_name; ?> </h2>
 <table cellspacing="0" cellpadding="0" border="1">
   <thead>
@@ -157,13 +155,13 @@ echo $_SESSION['user_id'];
     </tr>
   </thead>
 <tbody>
-<?php while ($book = $book_result->fetch_assoc()): ?>
+<?php foreach ($book_result as $book): ?>
     <tr>
       <td><?php echo htmlspecialchars($book['title']); ?></td>
       <td><?php echo htmlspecialchars($book['author']); ?></td>
       <td><a href="<?php echo htmlspecialchars($book['url']); ?>" target="_blank">Link</a></td>
     </tr>
-<?php endwhile; ?>
+<?php endforeach; ?>
 </tbody>
 </table>
 <?php endif; ?>
