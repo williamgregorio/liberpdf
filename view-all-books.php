@@ -15,7 +15,7 @@ $database = database();
 
 $user_id = $_SESSION['user_id'];
 
-$sql = 'SELECT books.title, books.author, books.url, categories.name AS category_name FROM books JOIN categories on books.category_id = categories.id WHERE categories.user_id = ?';
+$sql = 'SELECT books.id, books.title, books.author, books.url, categories.name AS category_name FROM books JOIN categories on books.category_id = categories.id WHERE categories.user_id = ?';
 $params = [$user_id];
 $types = 'i';
 
@@ -31,6 +31,7 @@ $all_books = $database->query($sql, $params, $types);
       <th>Author</th>
       <th>Category</th>
       <th>URL</th>
+      <th>Action</th>
     </tr>
   </thead>
   <tbody>
@@ -40,6 +41,12 @@ $all_books = $database->query($sql, $params, $types);
       <td><?php echo htmlspecialchars($book['author']); ?></td>
       <td><?php echo htmlspecialchars($book['category_name']); ?></td>
       <td><a href="<?php echo htmlspecialchars($book['url']); ?>" target="_blank">Link</a></td>
+      <td>
+        <form method="post" action="delete-book.php" style="display:inline;">
+          <input type="hidden" name="book_id" value="<?php echo $book['id']; ?>">
+          <button type="submit" onclick="return confirm('Are you sure you want to delete this book?');">Delete</button>
+        </form>
+      </td>
     </tr>
     <?php endforeach; ?>
   </tbody>
