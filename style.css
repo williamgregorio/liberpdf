@@ -1,0 +1,12 @@
+nav, ul{
+  display: flex;
+  gap: 16px;
+}
+
+nav ul li{
+  display: flex;
+  flex-direction: column-reverse;
+  text-decoration: none;
+  list-style: none;
+}
+
