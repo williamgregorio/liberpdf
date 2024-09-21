@@ -4,7 +4,7 @@ ini_set('display_startup_errors', 1);
 ?>
 
 <?php
-$pageTitle = 'Admin';
+$pageTitle = 'Dashboard';
 include 'header.php';
 require 'functions.php';
 
