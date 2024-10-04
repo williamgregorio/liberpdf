@@ -21,6 +21,9 @@ function isUsernameUnique($username) {
   return $stmt->fetchColumn() === 0;
 }
 
+function isPasswordStrong($password) {
+  return preg_match('/^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/', $password);
+}
 
 
 function createUser() {
