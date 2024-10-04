@@ -1,4 +1,4 @@
-<?
+<?php
 $db_path = __DIR__ . '/../data/db.sqlite3';
 $tables_dir = __DIR__ . '/../tables/';
 
@@ -9,7 +9,7 @@ if (file_exists($db_path)) {
 
 try {
   $pdo = new PDO('sqlite:' . $db_path);
-  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRORMODE_EXCEPTION);
+  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
   function readAndExecuteSQL($pdo, $sql_file) {
     $sql = file_get_contents($sql_file);
@@ -20,13 +20,10 @@ try {
   $category_sql_file = $tables_dir . 'category.sql';
   $book_sql_file = $tables_dir . 'book.sql';
 
-  function executeSQL() {
-    readAndExecuteSQL($pdo, $user_sql_file);
-    readAndExecuteSQL($pdo, $category_sql_file);
-    readAndExecuteSQL($pdo, $book_sql_file);
-  }
+  readAndExecuteSQL($pdo, $user_sql_file);
+  readAndExecuteSQL($pdo, $category_sql_file);
+  readAndExecuteSQL($pdo, $book_sql_file);
 
-  executeSQL();
   echo 'Database was created successfully.' . '\n';
 } catch(PDOException $error) {
   echo 'Database error: ' . $error->getMessage() . '\n';
