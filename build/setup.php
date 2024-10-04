@@ -14,7 +14,6 @@ try {
 
   function readAndExecuteSQL($pdo, $sql_file) {
     $sql = file_get_contents($sql_file);
-    echo $sql;
     $pdo->exec($sql);
   }
 
@@ -26,8 +25,7 @@ try {
   readAndExecuteSQL($pdo, $category_sql_file);
   readAndExecuteSQL($pdo, $book_sql_file);
 
-  echo 'Database was created successfully.' . '\n';
+  echo 'Database was created successfully.';
 } catch(PDOException $error) {
-  echo 'catch and fail';
   echo 'Database error: ' . $error->getMessage();
 }
