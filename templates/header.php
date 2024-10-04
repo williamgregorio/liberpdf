@@ -17,8 +17,6 @@
   <a href="/"><img src="assets/liberpdf-logo.png" alt="logo" /></a>
   <ul>
 <?php
-    session_start();
-
     if (isset($_SESSION['authenticated']) && $_SESSION['authenticated'] === true) {
       echo '<li><a href="admin.php">Dashboard</a></li>';
       echo '<li><a href="view-all-books.php">View all books</a></li>';
