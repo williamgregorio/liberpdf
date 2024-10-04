@@ -37,9 +37,9 @@ create_db() {
 }
 
 run_local_php_server() {
-  PORT=${1:-8000}
+  PORT=${1:-7001}
   echo "Starting PHP local server on port $PORT"
-  php -S locahost:$PORT
+  php -S localhost:$PORT
 }
 
 case "$COMMAND" in
@@ -55,8 +55,12 @@ case "$COMMAND" in
         ;;
     esac
     ;;
+  "run")
+    shift
+    run_local_php_server "$1"
+    ;;
   *)
-    echo "Usage: ./liberpdf.sh create db || ./liberpdf.sh run {port}"
+    echo "Usage: ./liberpdf.sh create db OR ./liberpdf.sh run {port} defaults to 7001"
     exit 1
     ;;
 esac
