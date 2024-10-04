@@ -20,7 +20,14 @@ try {
   $category_sql_file = $tables_dir . 'category.sql';
   $book_sql_file = $tables_dir . 'book.sql';
 
-  echo 'Database created successfully.\n';
+  function executeSQL() {
+    readAndExecuteSQL($pdo, $user_sql_file);
+    readAndExecuteSQL($pdo, $category_sql_file);
+    readAndExecuteSQL($pdo, $book_sql_file);
+  }
+
+  executeSQL();
+  echo 'Database was created successfully.\n';
 } catch(PDOException $error) {
   echo 'Database error: ' . $error->getMessage() . '\n';
 }
