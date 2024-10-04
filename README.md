@@ -1,5 +1,5 @@
 # liberpdf
-![liber pdf logo](/assets/liberpdf-logo.png)
+![liber pdf logo](/assets/liberpdf-logo.png){width=70px}
 
 ## Upcoming
 1. Migration to MySQL to SQlite3
