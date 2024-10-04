@@ -6,40 +6,7 @@ error_reporting(E_ALL);
 
 <?php 
 $pageTitle = "Login";
-include 'header.php';  
-require 'functions.php';
-
-loadEnvironment();
-$database = database();
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  $username = $_POST['username'];
-  $password = $_POST['password'];
-  echo $username;
-  echo $password;
-  $sql = 'SELECT id, password FROM users WHERE username = ?';
-  $params = [$username];
-  $types = 's';
-  $result = $database->query($sql, $params, $types);
-  var_dump($result);
-
-  if (!empty($result)) {
-    $user = $result[0];
-    $userId = $user['id'];
-    $hashedPassword = $user['password'];
-
-    if (password_verify($password, $hashedPassword)) {
-      $_SESSION['authenticated'] = true;
-      $_SESSION['user_id'] = $userId;
-      $_SESSION['username'] = $username;
-
-      header('Location: admin.php');
-      exit();
-    } else {
-      echo 'Invalid username or password.';
-    }
-  }
-}
+include 'templates/header.php';  
 ?>
 
 <form method="post" action="">
@@ -48,4 +15,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <button type="submit">Login</button>
 </form>
 
-<?php include 'footer.php'; ?>
+<?php include 'templates/footer.php'; ?>
