@@ -45,7 +45,7 @@ function createUser($username, $password, $email) {
   $hashed_password = password_hash($password, PASSWORD_DEFAULT);
   $stmt = $pdo->prepare("INSER INTO users (username, password, email) VALUES (:username, :password, :emails)");
   $stmt->bindParam(':username', $username);
-  $stmt->bindParam(':password', $password);
+  $stmt->bindParam(':password', $hashed_password);
   $stmt->bindParam(':email', $email);
 
   return $stmt->execute();
