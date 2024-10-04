@@ -7,6 +7,7 @@
 ## Prerequisites
 1. php 8^
 2. sqlite3
+3. php-pdo
 
 ## Installation and setup
 1. Clone the repository
