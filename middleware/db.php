@@ -6,6 +6,13 @@ function getConnection() {
   return $pdo;
 }
 
+function logout() {
+  session_start();
+  session_destroy();
+  header('Location: /');
+  exit;
+}
+
 function isEmailUnique($email) {
   $pdo = getConnection(); 
   $stmt = $pdo->prepare("SELECT COUNT(*) FROM users WHERE email = :email");
