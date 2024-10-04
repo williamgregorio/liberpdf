@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_URI'] === '/register' && $_SERVER['REQUEST_METHOD'] === 'P
     echo 'New account created successfully.';
     $_SESSION['username'] = $username;
     header('Location: /dashboard');
-    exit();
+    exit;
   } else {
    echo 'Account will not be created at this time.'; 
   }
