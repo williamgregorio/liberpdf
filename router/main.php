@@ -1,5 +1,4 @@
 <?php
-
 $request = $_SERVER['REQUEST_URI'];
 $root = dirname(__DIR__);
 $views = $root . '/views/';
@@ -14,6 +13,9 @@ switch($request) {
     break;
   case '/login':
     require $views . 'login.php';
+    break;
+  case '/dashboard':
+    require $views . 'admin.php';
     break;
   default:
     http_response_code(404);
