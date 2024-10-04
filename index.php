@@ -6,11 +6,8 @@ error_reporting(E_ALL);
 
 <?php 
 $pageTitle = "Home";
-include 'header.php';
+include 'templates/header.php';
 ?>
 
-<?php
-?>
-
-<?php include 'footer.php'; ?>
+<?php include 'templates/footer.php'; ?>
 
