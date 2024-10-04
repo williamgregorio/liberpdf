@@ -14,6 +14,13 @@ function isEmailUnique($email) {
   return $stmt->fetchColumn() === 0;
 }
 
+function isUsernameUnique($username) {
+  $pdo = getConnection();
+  $stmt = $pdo->prepare("SELECT COUNT(*) FROM users WHERE username = :username");
+  $stmt->execute();
+  return $stmt->fetchColumn() === 0;
+}
+
 
 
 function createUser() {
