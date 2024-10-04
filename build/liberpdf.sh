@@ -1,8 +1,8 @@
 #!/bin/bash
 
 COMMAND= "$1"
-DEFAULT_DATA_PATH="../data/db.sqlite3"
-DATA_DIR= "../data"
+DEFAULT_DATA_PATH="./data/db.sqlite3"
+DATA_DIR= "./data"
 
 check_data_directory() {
   if [! -d "$DATA_DIR"]; then
@@ -27,4 +27,13 @@ check_db_status() {
     echo "Database file does not exist."
   fi
 }
+
+create_db() {
+  check_data_directory
+  check_db_status
+
+  php build/setup.php
+  echo "Database setup is complete, and ready for usage."
+}
+
 
