@@ -1,4 +1,5 @@
 <?php
+session_start();
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -15,7 +16,8 @@ if ($_SERVER['REQUEST_URI'] === '/register' && $_SERVER['REQUEST_METHOD'] === 'P
   $email = $_POST['email'];
 
   if (createUser($username,$password, $password2, $email)) {
-    echo 'New account created successfully..redirect user please';
+    echo 'New account created successfully.';
+    $_SESSION['username'] = $username;
     header('Location: /dashboard');
     exit();
   } else {
