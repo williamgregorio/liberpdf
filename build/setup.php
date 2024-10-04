@@ -1,6 +1,8 @@
 <?php
-$db_path = __DIR__ . '/../data/db.sqlite3';
-$tables_dir = __DIR__ . '/../tables/';
+$root_path = dirname(__DIR__);
+
+$db_path = $root_path . '/data/db.sqlite3';
+$tables_dir = $root_path . '/build/tables/';
 
 if (file_exists($db_path)) {
   echo 'Database already exists in path.';
@@ -13,6 +15,7 @@ try {
 
   function readAndExecuteSQL($pdo, $sql_file) {
     $sql = file_get_contents($sql_file);
+    echo $sql;
     $pdo->exec($sql);
   }
 
@@ -26,5 +29,6 @@ try {
 
   echo 'Database was created successfully.' . '\n';
 } catch(PDOException $error) {
-  echo 'Database error: ' . $error->getMessage() . '\n';
+  echo 'catch and fail';
+  echo 'Database error: ' . $error->getMessage();
 }
