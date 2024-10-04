@@ -1,8 +1,8 @@
 <?
-$db_path = __DIR__ . '../data/db.sqlite3';
-$tables_dir = __DIR__ . '../tables/';
+$db_path = __DIR__ . '/../data/db.sqlite3';
+$tables_dir = __DIR__ . '/../tables/';
 
-if (file_exist($db_path)) {
+if (file_exists($db_path)) {
   echo 'Database already exists in path.';
   exit;
 }
