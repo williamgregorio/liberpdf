@@ -9,6 +9,17 @@
 2. sqlite3
 
 
+## Library management SCHEMA 
+1. **table:**users
+```plaintext
+User {
+    id,
+    username,
+    password,
+    email,
+    created_at
+}
+```
 
 
 
