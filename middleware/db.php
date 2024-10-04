@@ -13,6 +13,8 @@ function logout() {
   exit;
 }
 
+function login() {}
+
 function isEmailUnique($email) {
   $pdo = getConnection(); 
   $stmt = $pdo->prepare("SELECT COUNT(*) FROM users WHERE email = :email");
