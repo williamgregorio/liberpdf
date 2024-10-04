@@ -6,30 +6,30 @@
 3. php-pdo
 
 ## Installation and setup
-1. **Clone the repository**
+1. **Clone the repository**:
 ```bash
 git clone https://github.com/williamgregorio/liberpdf
 ```
-2. **Visit the liberpdf directory**
+2. **Visit the liberpdf directory**:
 ```bash
 cd liberpdf
 ```
-3. **Set permissions**
+3. **Set permissions**:
 ```bash
 sudo chmod +x liberpdf.sh
 ```
-4. Make alias liberpdf.sh
-    1. go to ~/.bashrc
+4. **Make alias liberpdf.sh**:
+`nvim ~/.bashrc`
 ```bash 
 alias liberpdf=`/path/to/liberpdf/liberpdf.sh`
 ```
-    2. source ~/.bashrc
+`source ~/.bashrc`
 
-5. **Create database**
+5. **Create database**:
 ```bash
 liberpdf create db
 ```
-6. **Run on localhost**
+6. **Run on localhost**:
 ```bash
 liberpdf run
 ```
