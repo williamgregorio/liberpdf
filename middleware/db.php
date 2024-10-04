@@ -43,13 +43,12 @@ function createUser($username, $password, $email) {
 
   $pdo = getConnection();
   $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-  $stmt = $pdo->prepare("INSER INTO users (username, password, email) VALUES (:username, :password, :emails)");
+  $stmt = $pdo->prepare("INSERT INTO users (username, password, email) VALUES (:username, :password, :emails)");
   $stmt->bindParam(':username', $username);
   $stmt->bindParam(':password', $hashed_password);
   $stmt->bindParam(':email', $email);
 
   return $stmt->execute();
-  //pwd 1 + 2 later on
 }
 
 
