@@ -19,11 +19,11 @@ cd liberpdf
 sudo chmod +x liberpdf.sh
 ```
 5. Make alias liberpdf.sh
-- go to ~/.bashrc
+1. go to ~/.bashrc
 ```bash 
 alias liberpdf=`/path/to/liberpdf/liberpdf.sh`
 ```
-- source ~/.bashrc
+2. source ~/.bashrc
 4. **Create database**
 ```bash
 liberpdf create db
