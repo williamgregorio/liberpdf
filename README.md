@@ -20,7 +20,13 @@ User {
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 }
 ```
-
+2. **table**:categories
+```plaintext
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+```
 
 
 
