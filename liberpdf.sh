@@ -36,6 +36,12 @@ create_db() {
   echo "Database setup is complete, and ready for usage."
 }
 
+run_local_php_server() {
+  PORT=${1:-8000}
+  echo "Starting PHP local server on port $PORT"
+  php -S locahost:$PORT
+}
+
 case "$COMMAND" in
   "create")
     shift
@@ -50,7 +56,7 @@ case "$COMMAND" in
     esac
     ;;
   *)
-    echo "Usage: ./liberpdf.sh create db"
+    echo "Usage: ./liberpdf.sh create db || ./liberpdf.sh run {port}"
     exit 1
     ;;
 esac
