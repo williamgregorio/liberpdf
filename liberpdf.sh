@@ -36,4 +36,21 @@ create_db() {
   echo "Database setup is complete, and ready for usage."
 }
 
-
+case "$COMMAND" in
+  "create")
+    shift
+    case "$1" in
+      "db")
+        create_db
+        ;;
+      *)
+        echo "Usage: ./liberpdf.sh create db"
+        exit 1
+        ;;
+    esac
+    ;;
+  *)
+    echo "Usage: ./liberpdf.sh create db"
+    exit 1
+    ;;
+esac
