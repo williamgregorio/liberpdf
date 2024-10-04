@@ -27,7 +27,7 @@ try {
   }
 
   executeSQL();
-  echo 'Database was created successfully.\n';
+  echo 'Database was created successfully.' . '\n';
 } catch(PDOException $error) {
   echo 'Database error: ' . $error->getMessage() . '\n';
 }
