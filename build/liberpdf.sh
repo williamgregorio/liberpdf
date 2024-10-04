@@ -1,10 +1,8 @@
 #!/bin/bash
 
 COMMAND= "$1"
-
 DEFAULT_DATA_PATH="../data/db.sqlite3"
 DATA_DIR= "../data"
-
 
 check_data_directory() {
   if [! -d "$DATA_DIR"]; then
@@ -22,9 +20,11 @@ check_db_status() {
     if [[ $TABLE_COUNT -gt 2 ]]; then
       echo "Database already has more than 2 tables, either delete it, or aborting now."
       exit 1
+    else 
+      echo "Database exist but not enough tables to run, web app."
     fi
-
-    
+  else
+    echo "Database file does not exist."
   fi
 }
 
