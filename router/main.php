@@ -2,6 +2,7 @@
 $request = $_SERVER['REQUEST_URI'];
 $request_method = $_SERVER['REQUEST_METHOD'];
 $root = dirname(__DIR__);
+$middleware = $root . '/middleware/db.php';
 $views = $root . '/views/';
 
 switch($request) {
@@ -10,14 +11,46 @@ switch($request) {
     require $views . 'home.php';
     break;
   case '/register':
-    require $views . 'register.php';
+    if ($request_method === 'POST') {
+      require $middleware;
+      $username = $_POST['username'];
+      $password = $_POST['password'];
+      $password2 = $_POST['password2'];
+      $email = $_POST['email'];
+
+      if (createUser($username, $password, $password2, $email)) {
+        echo 'New account has been created.'; 
+        $_SESSION['username'] = $username;
+        header('Location: /dashboard');
+        exit;
+      } else {
+        echo 'Account will not be created at this time.';
+      }
+    } else {
+      require $views . 'register.php';
+    }
     break;
   case '/login':
-    require $views . 'login.php';
+    if ($request_method === 'POST') {
+      require $middleware;
+
+      $username = $_POST['username'];
+      $password = $_POST['password'];
+
+      if (login($username, $password)) {
+        $_SESSION['username'] = $username;
+        header('Location: /dashboard');
+        exit;
+      } else {
+        echo 'Invalid username or password.';
+      }
+    } else {
+      require $views . 'login.php';
+    }
     break;
   case '/logout':
     if ($request_method === 'POST') {
-      require $root . '/middleware/db.php';
+      require $middleware;
       logout();
     }
     break;
