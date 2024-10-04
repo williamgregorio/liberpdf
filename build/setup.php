@@ -1,6 +1,5 @@
 <?php
 $root_path = dirname(__DIR__);
-
 $db_path = $root_path . '/data/db.sqlite3';
 $tables_dir = $root_path . '/build/tables/';
 
