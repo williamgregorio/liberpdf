@@ -22,7 +22,7 @@ function isUsernameUnique($username) {
 }
 
 function isPasswordStrong($password) {
-  return preg_match('/^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/', $password);
+  return preg_match('/^(?=.*[A-Z])(?=.*\d).{8,}$/', $password);
 }
 
 function createUser($username, $password, $email) {
@@ -43,12 +43,10 @@ function createUser($username, $password, $email) {
 
   $pdo = getConnection();
   $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-  $stmt = $pdo->prepare("INSERT INTO users (username, password, email) VALUES (:username, :password, :emails)");
+  $stmt = $pdo->prepare("INSERT INTO users (username, password, email) VALUES (:username, :password, :email)");
   $stmt->bindParam(':username', $username);
   $stmt->bindParam(':password', $hashed_password);
   $stmt->bindParam(':email', $email);
 
   return $stmt->execute();
 }
-
-
