@@ -25,8 +25,22 @@ function isPasswordStrong($password) {
   return preg_match('/^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/', $password);
 }
 
+function createUser($username, $password, $email) {
+  if (!isEmailUnique($email)) {
+    echo 'Email already exists.';
+    return false;
+  }
 
-function createUser() {
+  if (!isUsernameUnique($username)) {
+    echo 'Username already exists.';
+    return false;
+  }
+
+  if (!isPasswordStrong($password)) {
+   echo 'Password must be atleast 8 characters long, contain at least one uppercase letter, and one number.';
+    return false;
+  }
+
 
 }
 
