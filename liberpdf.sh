@@ -5,7 +5,8 @@ DATA_DIR="./data"
 
 check_data_directory() {
   if [ ! -d "$DATA_DIR" ]; then
-    printf "Data directory does not exist.\n...Creating new directory"
+    echo "Data directory does not exist."
+    echo "Creating new directory..."
     mkdir -p "$DATA_DIR"
     echo "Directory 'data' has been created."
   fi
