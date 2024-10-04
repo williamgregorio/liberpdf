@@ -1,5 +1,4 @@
 <?
-
 $db_path = __DIR__ . '../data/db.sqlite3';
 
 if (file_exist($db_path)) {
