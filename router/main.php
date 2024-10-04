@@ -9,6 +9,9 @@ switch($request) {
   case '/':
     require $views . 'home.php';
     break;
+  case '/register':
+    require $views . 'register.php';
+    break;
   case '/login':
     require $views . 'login.php';
     break;
