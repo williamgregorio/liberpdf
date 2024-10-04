@@ -7,6 +7,8 @@ if (file_exist($db_path)) {
 }
 
 try {
+  $pdo = new PDO('sqlite:' . $db_path);
+  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRORMODE_EXCEPTION);
 
   echo 'Database created successfully.\n';
 } catch(PDOException $error) {
