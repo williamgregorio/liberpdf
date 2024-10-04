@@ -13,7 +13,18 @@ function logout() {
   exit;
 }
 
-function login() {}
+function login($username, $password) {
+  $pdo = getConnection();
+  $stmt = $pdo->prepare("SELECT password FROM users WHERE username = :username");
+  $stmt->bindParam(':username', $username);
+  $stmt->execute();
+
+  $hashed_password = $stmt->fetchColumn();
+  if ($hashed_password && password_verify($password, $hashed_password)) {
+    return true;
+  }
+  return false;
+}
 
 function isEmailUnique($email) {
   $pdo = getConnection(); 
