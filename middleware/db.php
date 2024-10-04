@@ -25,7 +25,12 @@ function isPasswordStrong($password) {
   return preg_match('/^(?=.*[A-Z])(?=.*\d).{8,}$/', $password);
 }
 
-function createUser($username, $password, $email) {
+function createUser($username, $password, $password2, $email) {
+  if ($password !== $password2) {
+    echo 'Passwords do not match.';
+    return false;
+  }
+
   if (!isEmailUnique($email)) {
     echo 'Email already exists.';
     return false;
