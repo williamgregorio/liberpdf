@@ -1,5 +1,8 @@
 # liberpdf
 
+## Upcoming
+Migration to MySQL to SQlite3
+
 ## Problem:
 
 Whenever I find a valuable book online that is free, it's never by using a simple query like `"Make Your Own Neural Network 1st edition by Tariq Rashid"`.
