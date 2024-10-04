@@ -11,9 +11,10 @@ if ($_SERVER['REQUEST_URI'] === '/register' && $_SERVER['REQUEST_METHOD'] === 'P
 
   $username = $_POST['username'];
   $password = $_POST['password'];
+  $password2 = $_POST['password2'];
   $email = $_POST['email'];
 
-  if (createUser($username,$password, $email)) {
+  if (createUser($username,$password, $password2, $email)) {
     echo 'New account created successfully..redirect user please';
     header('Location: /dashboard');
     exit();
@@ -23,10 +24,11 @@ if ($_SERVER['REQUEST_URI'] === '/register' && $_SERVER['REQUEST_METHOD'] === 'P
 }
 ?>
 
-<h1>Register</h1>
+<h1>Create an account</h1>
 <form method="POST" action="/register">
   <input type="text" name="username" placeholder="Username" required>
   <input type="password" name="password" placeholder="Password" required>
+  <input type="password" name="password2" placeholder="Confirm Password" required>
   <input type="email" name="email" placeholder="Email" required>
   <button type="submit">Register</button>
 </form>
