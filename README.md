@@ -10,14 +10,14 @@
 
 
 ## Library management SCHEMA 
-1. **table:**users
+1. **table**:users
 ```plaintext
 User {
-    id,
-    username,
-    password,
-    email,
-    created_at
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT NOT NULL,
+    password TEXT NOT NULL,
+    email TEXT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 }
 ```
 
