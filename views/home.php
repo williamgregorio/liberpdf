@@ -1,4 +1,5 @@
 <?php
+$pageTitle = 'Home';
 require 'templates/header.php';
 ?>
 
