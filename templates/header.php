@@ -19,7 +19,11 @@
     session_start();
     if (isset($_SESSION['username'])) {
       echo '<li><a href="/dashboard">Dashboard</a></li>';
-    echo '<li><a href="/logout">Logout</a></li>';
+      echo '
+        <form method="POST" action="/logout" style="margin-top:12px;">
+          <button style="background:none;border:none;cursor:pointer;padding:0;margin:0;" type="submit">Logout</button>
+        </form>
+      ';
     } else {
       echo '<li><a href="/">Home</a></li>';
       echo '<li><a href="/register">Register</a></li>';
