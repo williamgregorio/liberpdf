@@ -1,11 +1,5 @@
 <?php
-session_start();
-
-if (!isset($_SESSION['username'])) {
-  header('Location: /login');
-  exit;
-}
+$pageTitle = 'Dashboard';
+require 'templates/header.php';
 ?>
-
-<?php require 'templates/header.php';?>
-<h1>Dashboard</h1>
+<h1>Dashboard, <?php echo $_SESSION['username'];?></h1>
