@@ -1,11 +1,9 @@
 <?php
-session_start();
+$pageTitle = 'Create account';
+require 'templates/header.php';
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-?>
-<?php
-require 'templates/header.php';
 ?>
 
 <h1>Create an account</h1>
