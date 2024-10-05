@@ -27,9 +27,12 @@ switch($request) {
       } else {
         echo 'Account will not be created at this time.';
       }
-    } else {
-      require $views . 'register.php';
     }
+    if (isset($_SESSION['username'])) { 
+      header('Location: /dashboard');
+      exit;
+    }
+    require $views . 'register.php';
     break;
   case '/login':
     if ($request_method === 'POST') {
