@@ -1,6 +1,6 @@
 <?php
-session_start();
-include 'templates/header.php';
+$pageTitle = 'Login';
+require 'templates/header.php';
 ?>
 
 <h1>Login</h1>
