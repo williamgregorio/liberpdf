@@ -47,9 +47,14 @@ switch($request) {
       } else {
         echo 'Invalid username or password.';
       }
-    } else {
-      require $views . 'login.php';
+    }      
+
+    session_start();
+    if (isset($_SESSION['username'])) {
+      header('Location: /dashboard');
+      exit;
     }
+    require $views . 'login.php';
     break;
   case '/logout':
     if ($request_method === 'POST') {
