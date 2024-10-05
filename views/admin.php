@@ -1,5 +1,10 @@
 <?php
+$pageTitle = 'Dashboard';
 require 'templates/header.php';
 ?>
+<h1>Dashboard, <?php echo $_SESSION['username'];?></h1>
 
-<h1>Dashboard</h1>
+
+<?php
+//craete a new book form
+?>
