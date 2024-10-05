@@ -20,6 +20,7 @@ switch($request) {
 
       if (createUser($username, $password, $password2, $email)) {
         echo 'New account has been created.'; 
+        session_start();
         $_SESSION['username'] = $username;
         header('Location: /dashboard');
         exit;
@@ -33,11 +34,13 @@ switch($request) {
   case '/login':
     if ($request_method === 'POST') {
       require $middleware;
+      echo $middleware;
 
       $username = $_POST['username'];
       $password = $_POST['password'];
 
       if (login($username, $password)) {
+        session_start();
         $_SESSION['username'] = $username;
         header('Location: /dashboard');
         exit;
@@ -55,9 +58,12 @@ switch($request) {
     }
     break;
   case '/dashboard':
+    session_start();
+    if (!isset($_SESSION['username'])){
+      header('Location: /login');
+    }    
     require $views . 'admin.php';
     break;
-
   default:
     http_response_code(404);
     require $views . '404.php';
