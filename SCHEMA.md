@@ -2,13 +2,13 @@
 
 1. **table**:users
 ```plaintext
-User {
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    username TEXT NOT NULL,
-    password TEXT NOT NULL,
-    email TEXT NOT NULL,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-}
+CREATE TABLE IF NOT EXISTS users (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  username TEXT NOT NULL UNIQUE,
+  password TEXT NOT NULL,
+  email TEXT NOT NULL UNIQUE,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
 ```
 2. **table**:categories
 ```plaintext
