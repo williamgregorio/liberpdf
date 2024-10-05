@@ -75,3 +75,6 @@ function createUser($username, $password, $password2, $email) {
 
   return $stmt->execute();
 }
+
+function createBook() {
+}
