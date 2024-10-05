@@ -28,6 +28,7 @@ switch($request) {
         echo 'Account will not be created at this time.';
       }
     }
+    session_start();
     if (isset($_SESSION['username'])) { 
       header('Location: /dashboard');
       exit;
