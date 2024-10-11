@@ -6,7 +6,7 @@ require 'templates/header.php';
 <h1>Dashboard, <?php echo $_SESSION['username'];?></h1>
 
 <h2>Create a new book</h2>
-<form method="POST" action="/create-book" style="">
+<form method="POST" action="/create-book">
   <label for="title">Book title:</label>
   <input type="text" name="title" required />
   <br>
@@ -18,4 +18,10 @@ require 'templates/header.php';
   <button type="submit">Create</button>
 </form>
 
+<h3>Create new category</h3>
+<form method="POST" action="/add-category">
+  <label for="category">Add new category:</label>
+  <input type="text" name="category" required />
+  <button type="submit">Add</button>
+</form>
 <?php require 'templates/footer.php' ?>
