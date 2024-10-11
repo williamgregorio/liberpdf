@@ -76,6 +76,14 @@ function createUser($username, $password, $password2, $email) {
   return $stmt->execute();
 }
 
+function checkUsernameById($username) {
+  $pdo = getConnection();
+  $stmt = "SELECT id FROM users WHERE username = :username";
+  $stmt->bindParam(':username', $username);
+  $stmt->execute();
+  return $stmt->fetchColumn();
+}
+
 function createBook($user_id, $title, $author, $url) {
   //go and add me category after when conn from select category for select user after this is done
   $pdo = getConnection();
