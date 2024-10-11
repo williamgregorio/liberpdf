@@ -84,9 +84,7 @@ function checkUsernameById($username) {
   return $stmt->fetchColumn();
 }
 
-// assuming the session only holds the username since unique is true
 function createBook($username, $title, $author, $url) {
-  //go and add me category after when conn from select category for select user after this is done
   $user_id = checkUsernameById($username);
   if (!$user_id) {
     echo 'username does not match this user id';
