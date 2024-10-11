@@ -73,6 +73,9 @@ switch($request) {
     }    
     require $views . 'admin.php';
     break;
+  case '/create-book':
+    session_start();
+    break;
   default:
     http_response_code(404);
     require $views . '404.php';
