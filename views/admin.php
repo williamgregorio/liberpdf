@@ -20,8 +20,8 @@ require 'templates/header.php';
 
 <h3>Create new category</h3>
 <form method="POST" action="/add-category">
-  <label for="category">Add new category:</label>
-  <input type="text" name="category" required />
+  <label for="name">Add new category:</label>
+  <input type="text" name="name" required />
   <button type="submit">Add</button>
 </form>
 <?php require 'templates/footer.php' ?>
