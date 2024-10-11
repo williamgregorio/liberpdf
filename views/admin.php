@@ -17,8 +17,5 @@ require 'templates/header.php';
   <input type="url" name="url" required />
   <button type="submit">Create</button>
 </form>
-<?php
-//craete a new book form
-?>
 
 <?php require 'templates/footer.php' ?>
