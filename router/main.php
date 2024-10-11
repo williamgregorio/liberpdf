@@ -38,7 +38,6 @@ switch($request) {
   case '/login':
     if ($request_method === 'POST') {
       require $middleware;
-      echo $middleware;
 
       $username = $_POST['username'];
       $password = $_POST['password'];
@@ -72,6 +71,24 @@ switch($request) {
       header('Location: /login');
     }    
     require $views . 'admin.php';
+    break;
+  case '/create-book':
+    session_start();
+    if ($request_method == 'POST') {
+      require $middleware;
+      $username = $_SESSION['username'];
+      $title = $_POST['title'];
+      $author = $_POST['author'];
+      $url = $_POST['url'];
+
+      if (createBook($username, $title, $author, $url)) {
+        echo 'new book created';
+        header('Location: /dashboard');
+        exit;
+      } else {
+        echo 'failed to create new book'; 
+      }
+    }
     break;
   default:
     http_response_code(404);

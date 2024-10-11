@@ -76,5 +76,28 @@ function createUser($username, $password, $password2, $email) {
   return $stmt->execute();
 }
 
-function createBook() {
+function checkUsernameById($username) {
+  $pdo = getConnection();
+  $stmt = $pdo->prepare("SELECT id FROM users WHERE username = :username");
+  $stmt->bindParam(':username', $username);
+  $stmt->execute();
+  return $stmt->fetchColumn();
 }
+
+function createBook($username, $title, $author, $url) {
+  $user_id = checkUsernameById($username);
+  if (!$user_id) {
+    echo 'username does not match this user id';
+    return false;
+  }
+
+  $pdo = getConnection();
+  $stmt = $pdo->prepare("INSERT INTO books (user_id, title, author, url) VALUES (:user_id, :title, :author, :url)");
+  $stmt->bindParam(':user_id', $user_id);
+  $stmt->bindParam(':title', $title);
+  $stmt->bindParam(':author', $author);
+  $stmt->bindParam(':url', $url);
+
+  return $stmt->execute();
+}
+

@@ -15,9 +15,7 @@ require 'templates/header.php';
   <br>
   <label for="url">Book URL:</label>
   <input type="url" name="url" required />
+  <button type="submit">Create</button>
 </form>
-<?php
-//craete a new book form
-?>
 
 <?php require 'templates/footer.php' ?>
