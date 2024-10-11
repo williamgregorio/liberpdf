@@ -78,7 +78,7 @@ function createUser($username, $password, $password2, $email) {
 
 function checkUsernameById($username) {
   $pdo = getConnection();
-  $stmt = "SELECT id FROM users WHERE username = :username";
+  $stmt = $pdo->prepare("SELECT id FROM users WHERE username = :username");
   $stmt->bindParam(':username', $username);
   $stmt->execute();
   return $stmt->fetchColumn();
@@ -95,7 +95,7 @@ function createBook($username, $title, $author, $url) {
   $stmt = $pdo->prepare("INSERT INTO books (user_id, title, author, url) VALUES (:user_id, :title, :author, :url)");
   $stmt->bindParam(':user_id', $user_id);
   $stmt->bindParam(':title', $title);
-  $stmt->bindParam(':author', $title);
+  $stmt->bindParam(':author', $author);
   $stmt->bindParam(':url', $url);
 
   return $stmt->execute();
