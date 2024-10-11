@@ -97,7 +97,17 @@ function createBook($username, $title, $author, $url) {
   $stmt->bindParam(':title', $title);
   $stmt->bindParam(':author', $author);
   $stmt->bindParam(':url', $url);
-
   return $stmt->execute();
 }
 
+function createCategory($username, $name) {
+  $user_id = checkUsernameById($username);
+  if (!$user_id) {
+    echo 'username does not match this user id';
+  }
+  $pdo = getConnection();
+  $stmt = $pdo->prepare("INSERT INTO categories (user_id, name) VALUE (:user_id, :name)");
+  $stmt->bindParam(':user_id', $user_id);
+  $stmt->bindParam(':name', $name);
+  return $stmt->execute();
+}
