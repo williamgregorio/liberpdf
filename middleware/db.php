@@ -76,5 +76,15 @@ function createUser($username, $password, $password2, $email) {
   return $stmt->execute();
 }
 
-function createBook() {
+function createBook($user_id, $title, $author, $url) {
+  //go and add me category after when conn from select category for select user after this is done
+  $pdo = getConnection();
+  $stmt = $pdo->prepare("INSERT INTO books (user_id, title, author, url) VALUES (:user_id, :title, :author, :url)");
+  $stmt->bindParam(':user_id', $user_id );
+  $stmt->bindParam(':title', $title);
+  $stmt->bindParam(':author', $title);
+  $stmt->bindParam(':url', $url);
+
+  return $stmt->execute();
 }
+
