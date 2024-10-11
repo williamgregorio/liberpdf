@@ -106,7 +106,7 @@ function createCategory($username, $name) {
     echo 'username does not match this user id';
   }
   $pdo = getConnection();
-  $stmt = $pdo->prepare("INSERT INTO categories (user_id, name) VALUE (:user_id, :name)");
+  $stmt = $pdo->prepare("INSERT INTO categories (user_id, name) VALUES (:user_id, :name)");
   $stmt->bindParam(':user_id', $user_id);
   $stmt->bindParam(':name', $name);
   return $stmt->execute();
