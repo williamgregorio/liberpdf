@@ -24,4 +24,9 @@ require 'templates/header.php';
   <input type="text" name="name" required />
   <button type="submit">Add</button>
 </form>
+
+<section>
+  <div class="books">
+  </div>
+</section>
 <?php require 'templates/footer.php' ?>
