@@ -77,11 +77,12 @@ switch($request) {
     if ($request_method == 'POST') {
       require $middleware;
       $username = $_SESSION['username'];
+      $category_id = $_POST['category'];
       $title = $_POST['title'];
       $author = $_POST['author'];
       $url = $_POST['url'];
 
-      if (createBook($username, $title, $author, $url)) {
+      if (createBook($username, $category_id, $title, $author, $url)) {
         echo 'new book created';
         header('Location: /dashboard');
         exit;
