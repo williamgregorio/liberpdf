@@ -1,14 +1,33 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 'On',);
 $pageTitle = 'Dashboard';
 require 'templates/header.php';
+$root = dirname(__DIR__);
+$middleware = $root . '/middleware/db.php';
+require $middleware;
+
+$username = $_SESSION['username'];
+$categories = getCategories($username);
 ?>
 
-<h1>Dashboard, <?php echo $_SESSION['username'];?></h1>
+<h1>Dashboard, <?php echo $username;?></h1>
 
 <h2>Create a new book</h2>
 <form method="POST" action="/create-book">
   <label for="title">Book title:</label>
   <input type="text" name="title" required />
+  <br>
+  <label for="category">Select category:</label>
+  <select type="select" name="category">
+  <?php
+    if (!empty($categories)) {
+      foreach ($categories as $category) {
+        echo '<option value=' . $category['name'] . "'>" . $category['name'] . '</option>';
+      }
+    }
+  ?>
+   </select>
   <br>
   <label for="author">Author:</label>
   <input type="text" name="author" required />
