@@ -23,7 +23,8 @@ $categories = getCategories($username);
     if (!empty($categories)) {
       foreach ($categories as $category) {
         $name = $category['name'];
-        echo '<option value="'.$name.'">';
+        $category_id = $category['id'];
+        echo '<option value="'.$category_id.'">';
           echo $name;
         echo '</option>';
       }
@@ -38,7 +39,7 @@ $categories = getCategories($username);
   <input type="url" name="url" required />
   <button type="submit">Create</button>
 </form>
-
+<hr>
 <h3>Create new category</h3>
 <form method="POST" action="/add-category">
   <label for="name">Add new category:</label>
