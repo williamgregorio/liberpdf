@@ -20,10 +20,14 @@ $categories = getCategories($username);
   <br>
   <label for="category">Select category:</label>
   <select type="select" name="category">
+  <option value="">--Choose and option--</option>
   <?php
     if (!empty($categories)) {
       foreach ($categories as $category) {
-        echo '<option value=' . $category['name'] . "'>" . $category['name'] . '</option>';
+        $name = $category['name'];
+        echo '<option value="'.$name.'">';
+          echo $name;
+        echo '</option>';
       }
     }
   ?>
