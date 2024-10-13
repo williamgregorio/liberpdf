@@ -105,9 +105,27 @@ function createCategory($username, $name) {
   if (!$user_id) {
     echo 'username does not match this user id';
   }
+
   $pdo = getConnection();
   $stmt = $pdo->prepare("INSERT INTO categories (user_id, name) VALUES (:user_id, :name)");
   $stmt->bindParam(':user_id', $user_id);
   $stmt->bindParam(':name', $name);
   return $stmt->execute();
+}
+
+function getCategories($username) {
+  $user_id = checkUsernameById($username);
+  if (!$user_id) {
+    echo 'username does not match this user id';
+  }
+
+  $pdo = getConnection();
+  $stmt = $pdo->prepare("SELECT * FROM categories WHERE user_id = :user_id");
+  $stmt->bindParam(':user_id', $user_id);
+
+  if ($stmt->execute()) {
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  } else {
+    return [];
+  }
 }
