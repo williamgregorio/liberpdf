@@ -1,6 +1,4 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', 'On',);
 $pageTitle = 'Dashboard';
 require 'templates/header.php';
 $root = dirname(__DIR__);
