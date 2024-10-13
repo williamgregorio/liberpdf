@@ -111,4 +111,3 @@ switch($request) {
     require $views . '404.php';
     break;
 }
-
