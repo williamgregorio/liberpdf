@@ -130,3 +130,20 @@ function getCategories($username) {
     return [];
   }
 }
+
+function getBooks($username) {
+ $user_id = checkUsernameById($username); 
+  if (!$user_id) {
+    echo 'username does not match this user id';
+  }
+
+  $pdo = getConnection();
+  $stmt = $pdo->prepare("SELECT * FROM books WHERE user_id = :user_id");
+  $stmt->bindParam(':user_id',$user_id);
+
+  if ($stmt->execute()) {
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  } else {
+    return [];
+  }
+}
