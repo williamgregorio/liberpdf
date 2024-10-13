@@ -7,6 +7,7 @@ require $middleware;
 
 $username = $_SESSION['username'];
 $categories = getCategories($username);
+$books = getBooks($username);
 ?>
 
 <h1>Dashboard, <?php echo $username;?></h1>
@@ -46,9 +47,37 @@ $categories = getCategories($username);
   <input type="text" name="name" required />
   <button type="submit">Add</button>
 </form>
-
+<hr>
 <section>
+  <h2>Books</h2>
   <div class="books">
+    <div>
+     <a href="#">Edit</a> 
+    </div>
+    <table border="1">
+      <thead>
+        <tr>
+          <th scope="col">Title</th>
+          <th scope="col">Category</th>
+          <th scope="col">Author</th>
+          <th scope="col">URL</th>
+        </tr>
+      </thead>
+      <tbody>
+    <?php
+      foreach ($books as $book) {
+        echo '<tr'.' id='.'"'.$book['id'].'">';
+          echo '<th>'.$book['title'].'</th>';
+          echo '<th>'.$book['category_id'].'</th>';
+          echo '<th>'.$book['author'].'</th>';
+          echo '<th>'.$book['url'].'</th>';
+        echo '</tr>';
+      }
+    ?>
+      </tbody>
+    </table>
   </div>
 </section>
+<?php
+?>
 <?php require 'templates/footer.php' ?>
