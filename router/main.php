@@ -77,11 +77,12 @@ switch($request) {
     if ($request_method == 'POST') {
       require $middleware;
       $username = $_SESSION['username'];
+      $category_id = $_POST['category'];
       $title = $_POST['title'];
       $author = $_POST['author'];
       $url = $_POST['url'];
 
-      if (createBook($username, $title, $author, $url)) {
+      if (createBook($username, $category_id, $title, $author, $url)) {
         echo 'new book created';
         header('Location: /dashboard');
         exit;
@@ -90,9 +91,24 @@ switch($request) {
       }
     }
     break;
+  case '/add-category':
+    session_start();
+    if ($request_method == 'POST') {
+      require $middleware;
+      $username = $_SESSION['username'];
+      $category_name = $_POST['name'];
+
+      if (createCategory($username, $category_name)) {
+        echo 'added new category'; 
+        header('Location: /dashboard');
+        exit;
+      } else {
+        echo 'failed to add new book';
+      }
+    }
+    break;
   default:
     http_response_code(404);
     require $views . '404.php';
     break;
 }
-
