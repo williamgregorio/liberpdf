@@ -70,7 +70,7 @@ $books = getBooks($username);
           echo '<th>'.$book['title'].'</th>';
           echo '<th>'.$book['category_id'].'</th>';
           echo '<th>'.$book['author'].'</th>';
-          echo '<th>'.$book['url'].'</th>';
+          echo '<th><a target="_blank" href="'.$book['url'].'">'.'View'.'</a></th>';
         echo '</tr>';
       }
     ?>
