@@ -81,7 +81,13 @@ function checkUsernameById($username) {
   $stmt = $pdo->prepare("SELECT id FROM users WHERE username = :username");
   $stmt->bindParam(':username', $username);
   $stmt->execute();
-  return $stmt->fetchColumn();
+  $user_id = $stmt->fetchColumn();
+
+  if (!user_id) {
+    return false;
+  }
+
+  return $user_id;
 }
 
 function createBook($username, $category_id, $title, $author, $url) {
