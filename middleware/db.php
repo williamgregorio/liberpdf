@@ -83,7 +83,7 @@ function checkUsernameById($username) {
   $stmt->execute();
   $user_id = $stmt->fetchColumn();
 
-  if (!user_id) {
+  if (!$user_id) {
     return false;
   }
 
@@ -149,7 +149,8 @@ function getBooks($username) {
   }
 
   $pdo = getConnection();
-  $stmt = $pdo->prepare("SELECT * FROM books WHERE user_id = :user_id");
+  $stmt = $pdo->prepare("SELECT books.id, books.title, books.author, books.url, categories.name AS category_name FROM books JOIN categories ON books.category_id = categories.id WHERE books.user_id = :user_id 
+    ");
   $stmt->bindParam(':user_id',$user_id);
 
   if ($stmt->execute()) {
