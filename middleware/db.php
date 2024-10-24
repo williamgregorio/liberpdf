@@ -92,8 +92,8 @@ function checkUsernameById($username) {
 
 function createBook($username, $category_id, $title, $author, $url) {
   $user_id = checkUsernameById($username);
+
   if (!$user_id) {
-    echo 'username does not match this user id';
     return false;
   }
 
@@ -104,26 +104,30 @@ function createBook($username, $category_id, $title, $author, $url) {
   $stmt->bindParam(':title', $title);
   $stmt->bindParam(':author', $author);
   $stmt->bindParam(':url', $url);
+
   return $stmt->execute();
 }
 
 function createCategory($username, $name) {
   $user_id = checkUsernameById($username);
+
   if (!$user_id) {
-    echo 'username does not match this user id';
+    return false;
   }
 
   $pdo = getConnection();
   $stmt = $pdo->prepare("INSERT INTO categories (user_id, name) VALUES (:user_id, :name)");
   $stmt->bindParam(':user_id', $user_id);
   $stmt->bindParam(':name', $name);
+
   return $stmt->execute();
 }
 
 function getCategories($username) {
   $user_id = checkUsernameById($username);
+
   if (!$user_id) {
-    echo 'username does not match this user id';
+    return [];
   }
 
   $pdo = getConnection();
@@ -139,13 +143,12 @@ function getCategories($username) {
 
 function getBooks($username) {
  $user_id = checkUsernameById($username); 
+
   if (!$user_id) {
-    echo 'username does not match this user id';
+    return [];
   }
 
   $pdo = getConnection();
-  $sql = "SELECT 
-  ";
   $stmt = $pdo->prepare("SELECT * FROM books WHERE user_id = :user_id");
   $stmt->bindParam(':user_id',$user_id);
 
