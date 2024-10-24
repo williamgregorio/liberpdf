@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 $pageTitle = 'Dashboard';
 require 'templates/header.php';
 $root = dirname(__DIR__);
@@ -68,7 +70,7 @@ $books = getBooks($username);
       foreach ($books as $book) {
         echo '<tr'.' id='.'"'.$book['id'].'">';
           echo '<th>'.$book['title'].'</th>';
-          echo '<th>'.$book['category_id'].'</th>';
+          echo '<th>'.$book['category_name'].'</th>';
           echo '<th>'.$book['author'].'</th>';
           echo '<th><a target="_blank" href="'.$book['url'].'">'.'View'.'</a></th>';
         echo '</tr>';
