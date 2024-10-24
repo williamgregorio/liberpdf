@@ -138,6 +138,8 @@ function getBooks($username) {
   }
 
   $pdo = getConnection();
+  $sql = "SELECT 
+  ";
   $stmt = $pdo->prepare("SELECT * FROM books WHERE user_id = :user_id");
   $stmt->bindParam(':user_id',$user_id);
 
